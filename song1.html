@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Wonderland</title>
+    <title>Loving Means Leaving</title>
     <style>
         body { margin: 0; font-family: sans-serif; background: #000; color: #fff; overflow: hidden; }
         .bg { 
@@ -12,38 +12,30 @@
         }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        /* 黑膠唱片 - 照片放大填滿 */
         .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
         .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
         .cover { 
             position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
             margin: -90px 0 0 -90px; border-radius: 50%; 
-            /* 修正後的封面圖連結 */
-            background: url('https://i.ytimg.com/vi/vWfX-MvE8I4/hqdefault.jpg') center/cover; 
+            background: url('https://i.ytimg.com/vi/AnTz7P_S_K0/hqdefault.jpg') center/cover; 
             border: 4px solid #111; z-index: 2;
         }
         .playing { animation: rotate 15s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 歌詞框 - 徹底修正滾動條樣式 (解決截圖中的白邊問題) */
+        /* 歌詞框 - 徹底隱藏滾動條 */
         .lyrics-box { 
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
             max-height: 38vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.15);
-            /* 針對 Firefox 和 IE 隱藏滾動條 */
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
+            
+            /* 針對不同瀏覽器隱藏滾動條 */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;     /* Firefox */
         }
-        /* 針對 Chrome/Safari 設置極簡滾動條，確保與第一首一致 */
+        /* 針對 Chrome, Safari, Edge 的滾動條隱藏方式 */
         .lyrics-box::-webkit-scrollbar { 
-            width: 4px; /* 設定極細 */
-        }
-        .lyrics-box::-webkit-scrollbar-thumb { 
-            background: rgba(255, 255, 255, 0.2); 
-            border-radius: 10px; 
-        }
-        .lyrics-box::-webkit-scrollbar-track { 
-            background: transparent; 
+            display: none; 
         }
 
         .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
@@ -60,41 +52,19 @@
             <div id="c" class="cover"></div>
         </div>
         <div class="lyrics-box">
-            <h2 style="margin-top:0; font-size: 24px;">Welcome to Wonderland</h2>
-            <div class="lyric-text">Welcome to Wonderland, we've got it all
-Potions and pastries that make you grow tall
-Forests and cottages, castles and cards that can talk
-Welcome to Wonderland, look where you're at
-Maddest of hatters, the Cheshire Cat
-Magical cabins and lovely white rabbits with clocks
+            <h2 style="margin-top:0; font-size: 24px;">Loving Means Leaving</h2>
+            <div class="lyric-text">I never meant to let you down
+It's a hell of a road I led you down
+And my heart's beating out of my chest
+And your hand is in my hand
+But it's getting late, gotta get it out
 
-Dancing through a dream underneath the stars
-Laughing 'til the morning comes
-Everyone that leaves has a heavy heart
-Oh, Wonderland I love
-
-Welcome to Wonderland, I'll be your guide
-Holding your hand under sapphire skies
-Let's go exploring or we could just go for a walk
-Welcome to Wonderland, where should we go
-There's a tea party along down the road
-Make an appearance and maybe they'll sing us a song
-
-Dancing through a dream underneath the stars
-Laughing 'til the morning comes
-Everyone that leaves has a heavy heart
-Oh, Wonderland I love
-
-Nothing around here is quite as it seems
-Not sure if anything's real or a dream
-And the only thing sure from the start
-Is the song that's inside of your heart
-Don't let it leave
-
-If this was a dream, then at least I've got
-Memories for when morning comes
-Now that I must leave with a heavy heart
-Oh, Wonderland I love</div>
+It would be easier to lie
+Say I'm all right
+But I'm not, no I'm not
+I've been trying to find the words
+But they always hurt
+So I'll just say this...</div>
         </div>
         <div id="player"></div>
     </div>
@@ -102,10 +72,9 @@ Oh, Wonderland I love</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            // 修正播放器邏輯：使用正確的官方音源 ID
             document.getElementById('player').innerHTML = `
                 <iframe width="0" height="0" 
-                    src="https://www.youtube-nocookie.com/embed/vWfX-MvE8I4?autoplay=1&rel=0" 
+                    src="https://www.youtube-nocookie.com/embed/AnTz7P_S_K0?autoplay=1&rel=0" 
                     frameborder="0" allow="autoplay; encrypted-media" 
                     style="position:absolute; visibility:hidden;">
                 </iframe>`;
