@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Song 1</title>
-<style>
-    body { margin:0; background:#000; color:#fff; font-family:sans-serif; text-align:center; overflow-x:hidden; }
-    .bg { position:fixed; width:100vw; height:100vh; background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('room.png') center/cover; filter:blur(40px); z-index:-1; }
-    .vinyl { width:200px; height:200px; background:radial-gradient(circle,#333,#000); border-radius:50%; margin:50px auto 20px; cursor:pointer; border:8px solid #222; }
-    .playing { animation: rotate 10s linear infinite; }
-    @keyframes rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-    .lyrics { background:rgba(255,255,255,0.1); padding:20px; border-radius:20px; width:80%; max-width:400px; margin:0 auto; max-height:40vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.2); white-space:pre-line; }
-    .back { position:fixed; top:20px; left:20px; color:#fff; text-decoration:none; background:rgba(0,0,0,0.5); padding:10px; border-radius:10px; }
-</style>
-</head>
+<head><meta charset="UTF-8"><style>
+    body{margin:0;background:#000;color:#fff;font-family:sans-serif;text-align:center;}
+    .vinyl{width:200px;height:200px;background:radial-gradient(circle,#333,#000);border-radius:50%;margin:50px auto;cursor:pointer;border:5px solid #444;}
+    .playing{animation:r 10s linear infinite;}@keyframes r{to{transform:rotate(360deg)}}
+    .lyrics{background:rgba(255,255,255,0.1);padding:20px;border-radius:15px;width:80%;margin:0 auto;max-height:40vh;overflow-y:auto;white-space:pre-line;}
+</style></head>
 <body>
-    <div class="bg"></div><a href="index.html" class="back">BACK</a>
+    <a href="index.html" style="color:#fff;position:fixed;top:20px;left:20px;">BACK</a>
     <div class="vinyl" onclick="play()"></div>
     <h2>Loving Means Leaving</h2>
-    <div class="lyrics">
-        I know you're sleeping, but I'm wide awake
-        Thinking 'bout all of the promises that we didn't break
-        And it's not that I don't love you, 'cause you know that I do
-        It's just that I'm tired of hurting and I'm tired of you
-
-        And loving means leaving, so I'm walking away
-        I'll always remember the way that we were
-        Before all the magic began to get blur
-    </div>
+    <div class="lyrics">I know you're sleeping, but I'm wide awake
+    Thinking 'bout all of the promises that we didn't break
+    And it's not that I don't love you, 'cause you know that I do
+    It's just that I'm tired of hurting and I'm tired of you
+    And loving means leaving, so I'm walking away...</div>
     <div id="p"></div>
-    <script>
-        function play(){ document.querySelector('.vinyl').classList.add('playing');
-        document.getElementById('p').innerHTML='<iframe width="1" height="1" src="https://www.youtube.com/embed/TOothaOx3wo?autoplay=1" allow="autoplay"></iframe>';}
-    </script>
+    <script>function play(){document.querySelector('.vinyl').classList.add('playing');document.getElementById('p').innerHTML='<iframe width="1" height="1" src="https://www.youtube.com/embed/TOothaOx3wo?autoplay=1" allow="autoplay"></iframe>';}</script>
 </body>
 </html>
