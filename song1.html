@@ -6,26 +6,83 @@
         body { margin: 0; font-family: sans-serif; background-color: #000; color: #fff; overflow: hidden; }
         .bg-blur { position: fixed; width: 100vw; height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png'); background-size: cover; background-position: center; filter: blur(40px); z-index: -1; transform: scale(1.1); }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-        .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 35px; }
-        .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 10px solid #222; animation: rotate 12s linear infinite; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
-        .cover-art { position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; background: url('https://i.ytimg.com/vi/TOothaOx3wo/hqdefault.jpg') center/cover; animation: rotate 12s linear infinite; border: 2px solid #111; }
+        
+        .vinyl-wrapper { position: relative; width: 250px; height: 250px; margin-bottom: 25px; cursor: pointer; }
+        .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 10px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+        .cover-art { position: absolute; top: 50%; left: 50%; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; background: url('https://i.ytimg.com/vi/TOothaOx3wo/hqdefault.jpg') center/cover; border: 2px solid #111; }
+        
+        .playing { animation: rotate 12s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .lyrics-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 35px; border-radius: 30px; width: 85%; max-width: 480px; border: 1px solid rgba(255, 255, 255, 0.2); }
-        .song-title { font-size: 26px; margin-bottom: 20px; font-weight: bold; }
-        .lyric-text { font-size: 20px; line-height: 1.8; color: #fff; }
-        #player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-        .back { position: fixed; top: 25px; left: 25px; color: white; text-decoration: none; padding: 12px 25px; background: rgba(0,0,0,0.4); border-radius: 40px; font-size: 14px; backdrop-filter: blur(10px); }
+
+        /* 完整歌詞框設定 */
+        .lyrics-box { 
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            padding: 25px; border-radius: 25px; 
+            width: 80%; max-width: 450px; 
+            max-height: 40vh; /* 限制高度 */
+            overflow-y: auto; /* 超過高度顯示滾動條 */
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+        }
+        .song-title { font-size: 24px; margin-bottom: 15px; font-weight: bold; position: sticky; top: 0; }
+        .lyric-text { font-size: 18px; line-height: 1.8; color: rgba(255,255,255,0.9); text-align: center; white-space: pre-line; }
+        
+        #player-container { position: absolute; width: 1px; height: 1px; opacity: 0; }
+        .back { position: fixed; top: 25px; left: 25px; color: white; text-decoration: none; padding: 10px 20px; background: rgba(0,0,0,0.4); border-radius: 40px; font-size: 14px; backdrop-filter: blur(10px); }
+        
+        /* 隱藏滾動條但保持功能 */
+        .lyrics-box::-webkit-scrollbar { width: 0px; }
     </style>
 </head>
 <body>
     <div class="bg-blur"></div><a href="index.html" class="back">← BACK</a>
     <div class="container">
-        <div class="vinyl-wrapper"><div class="vinyl"></div><div class="cover-art"></div></div>
+        <div class="vinyl-wrapper" onclick="playMusic()">
+            <div id="vinyl-disk" class="vinyl"></div>
+            <div id="cover-disk" class="cover-art"></div>
+        </div>
         <div class="lyrics-box">
             <div class="song-title">Loving Means Leaving</div>
-            <div class="lyric-text">"And loving means leaving<br>So I'm walking away<br>I'll always remember the way that we were"</div>
+            <div class="lyric-text">
+                I know you're sleeping
+                But I'm wide awake
+                Thinking 'bout all of the promises
+                That we didn't break
+
+                And it's not that I don't love you
+                'Cause you know that I do
+                It's just that I'm tired of hurting
+                And I'm tired of you
+
+                And loving means leaving
+                So I'm walking away
+                I'll always remember the way that we were
+                Before all the magic began to get blur
+                And loving means leaving
+                So I'm leaving today
+                I'll always remember the way that we were
+                Before all the magic began to get blur
+            </div>
         </div>
-        <iframe id="player" src="https://www.youtube-nocookie.com/embed/TOothaOx3wo?autoplay=1&start=55&rel=0&controls=0" allow="autoplay"></iframe>
+        <div id="player-container"></div>
     </div>
+
+    <script>
+        function playMusic() {
+            // 每次點擊都重新加入旋轉動畫
+            const v = document.getElementById('vinyl-disk');
+            const c = document.getElementById('cover-disk');
+            v.classList.remove('playing');
+            c.classList.remove('playing');
+            void v.offsetWidth; // 強制重繪
+            v.classList.add('playing');
+            c.classList.add('playing');
+            
+            // 重新載入播放器，強制音樂從 55 秒重新開始
+            document.getElementById('player-container').innerHTML = 
+                '<iframe width="1" height="1" src="https://www.youtube-nocookie.com/embed/TOothaOx3wo?autoplay=1&start=55&rel=0" allow="autoplay"></iframe>';
+        }
+    </script>
 </body>
 </html>
