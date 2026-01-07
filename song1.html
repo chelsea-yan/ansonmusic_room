@@ -20,8 +20,7 @@
         .cover { 
             position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
             margin: -90px 0 0 -90px; border-radius: 50%; 
-            /* 更換為正確的專輯封面圖 */
-            background: url('https://img.youtube.com/vi/AnTz7P_S_K0/maxresdefault.jpg') center/cover; 
+            background: url('https://i.ytimg.com/vi/TOothaOx3wo/hqdefault.jpg') center/cover; 
             border: 4px solid #111;
             z-index: 2;
         }
@@ -37,12 +36,15 @@
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
             max-height: 38vh; overflow-y: auto; 
             border: 1px solid rgba(255, 255, 255, 0.15);
-            /* --- 新增：徹底隱藏捲軸 --- */
+            
+            /* --- 這裡加入隱藏捲軸的代碼 --- */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE/Edge */
         }
-        /* --- 新增：隱藏 Chrome/Safari 捲軸 --- */
-        .lyrics-box::-webkit-scrollbar { display: none; }
+        /* --- 針對 Chrome/Safari 隱藏捲軸 --- */
+        .lyrics-box::-webkit-scrollbar { 
+            display: none; 
+        }
         
         .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
         
@@ -122,13 +124,12 @@ Oh</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            // 更換正確音源 ID，並微調 width/height 確保瀏覽器願意播放
             document.getElementById('player').innerHTML = `
                 <iframe 
-                    width="1" height="1" 
-                    src="https://www.youtube-nocookie.com/embed/AnTz7P_S_K0?autoplay=1&controls=0&modestbranding=1&rel=0" 
+                    width="0" height="0" 
+                    src="https://www.youtube-nocookie.com/embed/TOothaOx3wo?autoplay=1&start=0&controls=0&modestbranding=1&rel=0" 
                     frameborder="0" allow="autoplay" 
-                    style="position:absolute; opacity:0; pointer-events:none;">
+                    style="position:absolute; visibility:hidden;">
                 </iframe>`;
         }
     </script>
