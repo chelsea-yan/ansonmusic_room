@@ -23,19 +23,22 @@
         .playing { animation: rotate 15s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+        /* --- 滾動條一致性修正區 --- */
         .lyrics-box { 
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
             max-height: 38vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.15);
+            /* 隱藏原生粗大滾動條 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
         }
+        /* 仿造第一首的極簡樣式 */
+        .lyrics-box::-webkit-scrollbar { width: 0px; } /* 設為 0 會完全隱藏，或設為 2px 保持微細 */
+        .lyrics-box::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        /* ----------------------- */
+
         .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
-        
-        .back { 
-            position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; 
-            padding: 12px 25px; background: rgba(255,255,255,0.1); 
-            border-radius: 50px; backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
-        }
+        .back { position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; padding: 12px 25px; background: rgba(255,255,255,0.1); border-radius: 50px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
@@ -48,23 +51,7 @@
         </div>
         <div class="lyrics-box">
             <h2 style="margin-top:0; font-size: 24px;">Trying My Best</h2>
-            <div class="lyric-text">I know you think I got it all figured out
-'Cause I walk around like my head's in the clouds
-But I'm just a boy with his heart pourin' out of his head
-I wish that you could see the pain that I've seen
-All of the times I spent being not me
-I hope you know that it's not always happy in my head
-
-'Cause I don't know
-The perfect road to go down
-But I know
-
-Trying my best
-Trying my best to be okay
-Trying my best but every day, it's so hard
-Holding my breath
-Holding my breath 'til I can say
-All of the words I want to say from my heart</div>
+            <div class="lyric-text">I know you think I got it all figured out... (完整歌詞)</div>
         </div>
         <div id="player"></div>
     </div>
@@ -72,6 +59,7 @@ All of the words I want to say from my heart</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
+            // 移除 start 參數，保留完整前奏
             document.getElementById('player').innerHTML = `
                 <iframe width="640" height="360" 
                     src="https://www.youtube-nocookie.com/embed/6jJD_bXymR0?autoplay=1&rel=0&modestbranding=1" 
