@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"><title>Loving Means Leaving</title>
+    <meta charset="UTF-8">
+    <title>Loving Means Leaving</title>
     <style>
         body { margin: 0; font-family: sans-serif; background: #000; color: #fff; overflow: hidden; }
         .bg { position: fixed; width: 100vw; height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png') center/cover; filter: blur(50px); z-index: -1; transform: scale(1.2); }
@@ -90,7 +91,14 @@ Oh</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            document.getElementById('player').innerHTML = '<iframe width="1" height="1" src="https://www.youtube-nocookie.com/embed/TOothaOx3wo?autoplay=1&start=0" allow="autoplay" style="display:none;"></iframe>';
+            // 深度隱藏播放器
+            document.getElementById('player').innerHTML = `
+                <iframe 
+                    width="0" height="0" 
+                    src="https://www.youtube-nocookie.com/embed/TOothaOx3wo?autoplay=1&start=0&controls=0&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" 
+                    frameborder="0" allow="autoplay; encrypted-media" 
+                    style="position:absolute; visibility:hidden;">
+                </iframe>`;
         }
     </script>
 </body>
