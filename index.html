@@ -2,45 +2,58 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to My Room</title>
+    <title>Anson Seabra's Room</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #000; font-family: sans-serif; }
+        body { margin: 0; overflow: hidden; background-color: #000; font-family: "Apple LiGothic", "Microsoft JhengHei", sans-serif; }
         .room { 
             position: relative; width: 100vw; height: 100vh; 
             background: url('room.png') center/cover no-repeat; 
         }
         .title {
             position: absolute; top: 8%; width: 100%; text-align: center;
-            color: #fff; font-size: 35px; font-weight: bold; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
+            color: #fff; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+            letter-spacing: 3px;
         }
-        .item { 
-            position: absolute; cursor: pointer; transition: transform 0.3s;
-            background-image: url('characters.png'); /* 使用同一張手機殼照片 */
-            background-size: 300px auto; /* 縮放照片大小以符合顯示 */
-            border-radius: 10px;
+        
+        /* 歌曲文字樣式 */
+        .song-link {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .item:hover { transform: scale(1.1); filter: brightness(1.2); }
+        .song-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            color: #fff;
+        }
 
-        /* 以下為各個角色的座標與在照片中的位置 */
-        .cat-black { width: 80px; height: 80px; top: 60%; left: 15%; background-position: -20px -200px; } 
-        .candle { width: 60px; height: 90px; top: 52%; left: 48%; background-position: -180px -50px; }
-        .dog { width: 90px; height: 90px; top: 68%; left: 75%; background-position: -150px -280px; }
-        .cat-white { width: 70px; height: 70px; top: 40%; left: 10%; background-position: -80px -450px; }
-        .bone { width: 80px; height: 50px; top: 82%; left: 45%; background-position: -150px -550px; }
-        .star { width: 50px; height: 50px; top: 15%; left: 85%; background-position: -220px -100px; }
+        /* 根據你打叉的位置設定座標 */
+        .pos1 { top: 60%; left: 15%; } /* 左側櫃子 */
+        .pos2 { top: 55%; left: 45%; } /* 中間桌子 */
+        .pos3 { top: 70%; left: 75%; } /* 右側沙發 */
+        .pos4 { top: 35%; left: 20%; } /* 左上架子 */
+        .pos5 { top: 82%; left: 40%; } /* 下方地毯 */
+        .pos6 { top: 15%; left: 75%; } /* 右上窗戶 */
     </style>
 </head>
 <body>
     <div class="room">
         <div class="title">Welcome to my room</div>
 
-        <a href="song1.html"><div class="item cat-black"></div></a>
-        <a href="song2.html"><div class="item candle"></div></a>
-        <a href="song3.html"><div class="item dog"></div></a>
-        <a href="song4.html"><div class="item cat-white"></div></a>
-        <a href="song5.html"><div class="item bone"></div></a>
-        <a href="song6.html"><div class="item star"></div></a>
+        <a href="song1.html" class="song-link pos1">Loving Means Leaving</a>
+        <a href="song2.html" class="song-link pos2">You'll Always Be Mine</a>
+        <a href="song3.html" class="song-link pos3">Hard To Be Human</a>
+        <a href="song4.html" class="song-link pos4">Trying My Best</a>
+        <a href="song5.html" class="song-link pos5">Welcome To Wonderland</a>
+        <a href="song6.html" class="song-link pos6">Hindenburg Lover</a>
     </div>
 </body>
 </html>
