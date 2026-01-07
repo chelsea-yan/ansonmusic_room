@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Anson Seabra's Room</title>
+    <title>Welcome to My Room</title>
     <style>
-        body { background-color: #dce4ee; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .room { width: 400px; height: 700px; background: #e6ecf3; border: 10px solid white; border-radius: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-        .item { position: absolute; cursor: pointer; transition: 0.3s; font-size: 50px; text-decoration: none; }
-        .item:hover { transform: scale(1.2) rotate(5deg); }
-        .cat-black { top: 150px; left: 50px; }
-        .candle { top: 120px; right: 60px; }
-        .dog { top: 380px; right: 50px; }
-        .cat-white { top: 350px; left: 60px; }
-        .bone { bottom: 100px; left: 150px; }
-        .star { top: 250px; left: 180px; color: #a8dadc; }
-        .title { text-align: center; margin-top: 50px; font-family: sans-serif; color: #555; }
+        body { margin: 0; overflow: hidden; background-color: #000; font-family: sans-serif; }
+        .room { 
+            position: relative; width: 100vw; height: 100vh; 
+            background: url('room.png') center/cover no-repeat; 
+        }
+        .title {
+            position: absolute; top: 8%; width: 100%; text-align: center;
+            color: #fff; font-size: 35px; font-weight: bold; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+        .item { 
+            position: absolute; cursor: pointer; transition: transform 0.3s;
+            background-image: url('characters.png'); /* 使用同一張手機殼照片 */
+            background-size: 300px auto; /* 縮放照片大小以符合顯示 */
+            border-radius: 10px;
+        }
+        .item:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+        /* 以下為各個角色的座標與在照片中的位置 */
+        .cat-black { width: 80px; height: 80px; top: 60%; left: 15%; background-position: -20px -200px; } 
+        .candle { width: 60px; height: 90px; top: 52%; left: 48%; background-position: -180px -50px; }
+        .dog { width: 90px; height: 90px; top: 68%; left: 75%; background-position: -150px -280px; }
+        .cat-white { width: 70px; height: 70px; top: 40%; left: 10%; background-position: -80px -450px; }
+        .bone { width: 80px; height: 50px; top: 82%; left: 45%; background-position: -150px -550px; }
+        .star { width: 50px; height: 50px; top: 15%; left: 85%; background-position: -220px -100px; }
     </style>
 </head>
 <body>
     <div class="room">
-        <div class="title">" Welcome to my space "<br><b>Anson Seabra Room</b></div>
-        <a href="song1.html" class="item cat-black">🐈‍⬛</a>
-        <a href="song2.html" class="item candle">🕯️</a>
-        <a href="song3.html" class="item dog">🐶</a>
-        <a href="song4.html" class="item cat-white">🐈</a>
-        <a href="song5.html" class="item bone">🦴</a>
-        <a href="song6.html" class="item star">✨</a>
+        <div class="title">Welcome to my room</div>
+
+        <a href="song1.html"><div class="item cat-black"></div></a>
+        <a href="song2.html"><div class="item candle"></div></a>
+        <a href="song3.html"><div class="item dog"></div></a>
+        <a href="song4.html"><div class="item cat-white"></div></a>
+        <a href="song5.html"><div class="item bone"></div></a>
+        <a href="song6.html"><div class="item star"></div></a>
     </div>
 </body>
 </html>
