@@ -12,7 +12,7 @@
         }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        /* 黑膠唱片 - 封面放大填滿版 */
+        /* 黑膠唱片 - 封面放大填滿 */
         .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
         .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
         .cover { 
@@ -24,7 +24,7 @@
         .playing { animation: rotate 15s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 磨砂玻璃歌詞框 */
+        /* 高品質磨砂玻璃框 */
         .lyrics-box { 
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
@@ -113,10 +113,18 @@ I just wish she was you</div>
     </div>
     <script>
         function playMusic() {
-            document.getElementById('v').classList.add('playing');
-            document.getElementById('c').classList.add('playing');
+            var v = document.getElementById('v');
+            var c = document.getElementById('c');
+            v.classList.add('playing');
+            c.classList.add('playing');
+            
+            // 使用更標準的嵌入連結
             document.getElementById('player').innerHTML = `
-                <iframe width="0" height="0" src="https://www.youtube-nocookie.com/embed/1_Rb-jYZWW8?autoplay=1&start=0&controls=0&modestbranding=1&rel=0" frameborder="0" allow="autoplay" style="position:absolute; visibility:hidden;"></iframe>`;
+                <iframe width="640" height="360" 
+                    src="https://www.youtube.com/embed/1_Rb-jYZWW8?autoplay=1&controls=0&modestbranding=1" 
+                    frameborder="0" allow="autoplay; encrypted-media" 
+                    style="position:absolute; top:-1000px; left:-1000px; opacity:0; pointer-events:none;">
+                </iframe>`;
         }
     </script>
 </body>
