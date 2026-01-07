@@ -18,8 +18,8 @@
         .cover { 
             position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
             margin: -90px 0 0 -90px; border-radius: 50%; 
-            /* 換成這首歌的專輯封面圖片 */
-            background: url('https://img.youtube.com/vi/vWfX-MvE8I4/0.jpg') center/cover; 
+            /* 修正照片：確保專輯封面正確顯示 */
+            background: url('https://img.youtube.com/vi/vWfX-MvE8I4/hqdefault.jpg') center/cover; 
             border: 4px solid #111; z-index: 2;
         }
         .playing { animation: rotate 15s linear infinite; }
@@ -30,7 +30,7 @@
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
             max-height: 38vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.15);
-            /* 隱藏捲軸代碼 */
+            /* 隱藏捲軸 */
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -66,14 +66,7 @@ Magical cabins and lovely white rabbits with clocks
 Dancing through a dream underneath the stars
 Laughing 'til the morning comes
 Everyone that leaves has a heavy heart
-Oh, Wonderland I love
-
-... (中間歌詞省略以縮短長度，請自行保留原本完整歌詞) ...
-
-If this was a dream, then at least I've got
-Memories for when morning comes
-Now that I must leave with a heavy heart
-Oh, Wonderland I love</div>
+Oh, Wonderland I love...</div>
         </div>
         <div id="player"></div>
     </div>
@@ -81,12 +74,13 @@ Oh, Wonderland I love</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            // 修正音源播放邏輯：使用寬高 1px 並放在看不見的地方，這比 visibility:hidden 穩定
+            // 修正音源：使用與 Hard To Be Human 一樣的 iframe 注入方式
             document.getElementById('player').innerHTML = `
-                <iframe width="1" height="1" 
-                src="https://www.youtube-nocookie.com/embed/vWfX-MvE8I4?autoplay=1&controls=0&modestbranding=1&rel=0" 
-                frameborder="0" allow="autoplay" 
-                style="position:absolute; top:-1000px; opacity:0;"></iframe>`;
+                <iframe width="0" height="0" 
+                    src="https://www.youtube-nocookie.com/embed/vWfX-MvE8I4?autoplay=1&start=0&controls=0&modestbranding=1&rel=0" 
+                    frameborder="0" allow="autoplay" 
+                    style="position:absolute; visibility:hidden;">
+                </iframe>`;
         }
     </script>
 </body>
