@@ -12,7 +12,7 @@
         }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        /* 黑膠唱片 - 封面放大填滿 */
+        /* 黑膠唱片 - 封面放大版 */
         .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
         .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
         .cover { 
@@ -52,73 +52,39 @@
         </div>
         <div class="lyrics-box">
             <h2 style="margin-top:0; font-size: 24px;">You'll Always Be Mine</h2>
-            <div class="lyric-text">I’m across the pond again
-A new start, new chapter for this American, hmm
-And I’m back here in Kensington
-Same rain, new face to make some memories with, hmm
+            <div class="lyric-text">We fell in love for a moment
+Gone in the blink of an eye
+And though time has gone by
+And I don’t have you
+You’ll always be mine
 
-She’s on my lips
-But you’re on my heart
-I tell her “I’m fine”
-I’m falling apart
-And she’s in my bed
-But you’re in my dreams
-You won’t let me rest
-Even in my sleep
+We fell in love in the summer
+Gone by the end of July
+And though you’re in the arms
+Of somebody new
+You’ll always be mine
 
-You know that London’s so much colder now that you went away
-You took my favorite city and you painted it gray
-I thought that I could bring the color back with somebody new
-Oh, but even with the accent, I just wish she was you
-I just wish she was you
-Hmm, hmm
+Ain’t it hard
+Trying to find your way back
+From a broken heart
+Know the destination
+But it seems so far
+Not sure if you can make it
+But you’ve got to go
+March on alone
 
-I’m on the train again
-New ticket, same old destination, hmm
-Hyde Park and the West End
-Try not to think back to that night we went
-But I just can’t forget
-
-She’s on my lips
-But you’re on my heart
-I tell her “I’m fine”
-I’m falling apart
-She’s in my arms
-But you’re in my speech
-I still hear your words
-In the way that I speak
-
-You know that London’s so much colder now that you went away
-You took my favorite city and you painted it gray
-I thought that I could bring the color back with somebody new
-Oh, but even with the accent, I just wish she was you
-
-I just wish she would call me when I can’t sleep at night
-I wish she could melt me with that look in her eyes
-I wish I was happy, I wish she was enough
-But when we’re together, I just wish it was us
-
-You know that London’s so much colder now that you went away
-You took my favorite city and you painted it gray
-I thought that I could bring the color back with somebody new
-Oh, but even with the accent, I just wish she was you
-I just wish she was you
-
-Hmm, hmm, hmm
-I just wish she was you
-Hmm, hmm, hmm
-I just wish she was you</div>
+We fell in love for reason
+Maybe I’ll never know why
+But there’s a mark on my heart
+In the shape of you
+And you’ll always be mine</div>
         </div>
         <div id="player"></div>
     </div>
     <script>
         function playMusic() {
-            var v = document.getElementById('v');
-            var c = document.getElementById('c');
-            v.classList.add('playing');
-            c.classList.add('playing');
-            
-            // 使用更標準的嵌入連結
+            document.getElementById('v').classList.add('playing');
+            document.getElementById('c').classList.add('playing');
             document.getElementById('player').innerHTML = `
                 <iframe width="640" height="360" 
                     src="https://www.youtube.com/embed/1_Rb-jYZWW8?autoplay=1&controls=0&modestbranding=1" 
