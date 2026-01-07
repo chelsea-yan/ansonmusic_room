@@ -10,44 +10,60 @@
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png') center/cover; 
             filter: blur(60px); z-index: -1; transform: scale(1.2); 
         }
+        
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        /* 黑膠唱片 */
+        /* 黑膠轉動 - 封面放大版 */
         .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
         .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
+        
         .cover { 
             position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
             margin: -90px 0 0 -90px; border-radius: 50%; 
-            /* 使用最穩定的封面圖床 */
-            background: url('https://img.youtube.com/vi/AnTz7P_S_K0/0.jpg') center/cover; 
-            border: 4px solid #111; z-index: 2;
+            /* 更換為正確的專輯封面圖 */
+            background: url('https://img.youtube.com/vi/AnTz7P_S_K0/maxresdefault.jpg') center/cover; 
+            border: 4px solid #111;
+            z-index: 2;
         }
+
         .playing { animation: rotate 15s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 歌詞框 - 徹底隱藏捲軸 */
+        /* 磨砂玻璃框 */
         .lyrics-box { 
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
-            max-height: 40vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.15);
+            max-height: 38vh; overflow-y: auto; 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* --- 新增：徹底隱藏捲軸 --- */
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE/Edge */
         }
-        .lyrics-box::-webkit-scrollbar { display: none; } /* Chrome, Safari */
-
+        /* --- 新增：隱藏 Chrome/Safari 捲軸 --- */
+        .lyrics-box::-webkit-scrollbar { display: none; }
+        
         .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
         
-        .back { position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; padding: 12px 25px; background: rgba(255,255,255,0.1); border-radius: 50px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        .back { 
+            position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; 
+            padding: 12px 25px; background: rgba(255,255,255,0.1); 
+            border-radius: 50px; backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+        }
     </style>
 </head>
 <body>
     <div class="bg"></div>
     <a href="index.html" class="back">← BACK</a>
+    
     <div class="container">
         <div class="vinyl-wrapper" onclick="playMusic()">
             <div id="v" class="vinyl"></div>
             <div id="c" class="cover"></div>
         </div>
+        
         <div class="lyrics-box">
             <h2 style="margin-top:0; font-size: 24px;">Loving Means Leaving</h2>
             <div class="lyric-text">I never meant to let you down
@@ -57,41 +73,62 @@ And your hand is in my hand
 But it's getting late, gotta get it out
 
 It would be easier to lie
-Say I'm all right
-But I'm not, no I'm not
-I've been trying to find the words
-But they always hurt
-So I'll just say this
+But I really hope that you'll see in time
 
-That I'm done
-Looking for the person that I was
-'Cause she's gone
-And I know that it's hard
-But I'm not who you think I am
-And I can't be that girl again
-So I'll just say this
-Loving means leaving sometimes
+Sometimes loving means leaving
+Sometimes people need healing
+Sometimes there's no good way
+To make a wrong thing right
+Some things change with the seasons
+Sometimes the heart has its reasons
+Yeah, sometimes what's good is goodbye
 
-I hope you find the person that you're looking for
-I hope you find the person that you're waiting for
-And I hope that you're happy
-And I hope that you're free
-But I'm not who you think I am
-And I can't be that girl again
-So I'll just say this
-Loving means leaving sometimes</div>
+You probably think it was easy for me
+Like you don't play the lead in all of my dreams
+Like I don't wake up almost every day
+With a tear—stained pillow case
+But I'm not trying to make it all about me
+
+Maybe I should have lied
+'Cause god, it just hurts on the other side
+
+Sometimes loving means leaving
+Sometimes people need healing
+Sometimes there's no good way
+To make a wrong thing right
+Some things change with the seasons
+Sometimes the heart has its reasons
+Yeah, sometimes what's good is goodbye
+
+There's a universe where this could've worked
+And I wish we were in it
+'Cause all I know is I broke your heart
+And I wish that I didn't
+
+But sometimes loving means leaving
+Sometimes people need healing
+Sometimes there's no good way
+To make a wrong thing right
+And some things change with the seasons
+Sometimes the heart has its reasons
+Yeah, sometimes what's good is goodbye
+Oh</div>
         </div>
-        <div id="player" style="position: absolute; left: -9999px; transform: scale(0);"></div>
+        
+        <div id="player"></div>
     </div>
+
     <script>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            // 透過標準尺寸加 scale(0) 避開瀏覽器阻斷
+            // 更換正確音源 ID，並微調 width/height 確保瀏覽器願意播放
             document.getElementById('player').innerHTML = `
-                <iframe width="640" height="360" 
-                    src="https://www.youtube-nocookie.com/embed/AnTz7P_S_K0?autoplay=1&rel=0" 
-                    frameborder="0" allow="autoplay; encrypted-media">
+                <iframe 
+                    width="1" height="1" 
+                    src="https://www.youtube-nocookie.com/embed/AnTz7P_S_K0?autoplay=1&controls=0&modestbranding=1&rel=0" 
+                    frameborder="0" allow="autoplay" 
+                    style="position:absolute; opacity:0; pointer-events:none;">
                 </iframe>`;
         }
     </script>
