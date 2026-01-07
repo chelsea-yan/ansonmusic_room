@@ -12,26 +12,22 @@
         }
         .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
         
-        /* 黑膠唱片 - 封面放大填滿 */
         .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
         .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
         .cover { 
             position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
             margin: -90px 0 0 -90px; border-radius: 50%; 
-            background: url('https://i.ytimg.com/vi/317aiRFrhXY/hqdefault.jpg') center/cover; 
+            background: url('https://i.ytimg.com/vi/6jJD_bXymR0/hqdefault.jpg') center/cover; 
             border: 4px solid #111; z-index: 2;
         }
         .playing { animation: rotate 15s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* 高品質磨砂玻璃框 */
         .lyrics-box { 
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
             max-height: 38vh; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.15);
         }
-        .lyrics-box::-webkit-scrollbar { width: 6px; }
-        .lyrics-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
         .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
         
         .back { 
@@ -59,6 +55,10 @@ I wish that you could see the pain that I've seen
 All of the times I spent being not me
 I hope you know that it's not always happy in my head
 
+'Cause I don't know
+The perfect road to go down
+But I know
+
 Trying my best
 Trying my best to be okay
 Trying my best but every day, it's so hard
@@ -72,12 +72,11 @@ All of the words I want to say from my heart</div>
         function playMusic() {
             document.getElementById('v').classList.add('playing');
             document.getElementById('c').classList.add('playing');
-            // 使用最相容的嵌入連結，加上 enablejsapi=1 以增加播放成功率
             document.getElementById('player').innerHTML = `
                 <iframe width="640" height="360" 
-                    src="https://www.youtube.com/embed/317aiRFrhXY?autoplay=1&enablejsapi=1" 
+                    src="https://www.youtube-nocookie.com/embed/6jJD_bXymR0?autoplay=1&rel=0&modestbranding=1" 
                     frameborder="0" allow="autoplay; encrypted-media" 
-                    style="position:absolute; top:-1000px; left:-1000px; opacity:0;">
+                    style="position:absolute; top:-1000px; left:-1000px; opacity:0; pointer-events:none;">
                 </iframe>`;
         }
     </script>
