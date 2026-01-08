@@ -1,68 +1,143 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Hindenburg Lover</title>
-<style>
-body { margin:0; font-family:sans-serif; background:#000; color:#fff; overflow:hidden; }
-.bg { position:fixed; width:100vw; height:100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png') center/cover; filter: blur(60px); transform: scale(1.2); z-index:-1; }
-.container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; }
-.vinyl-wrapper { position:relative; width:280px; height:280px; margin-bottom:30px; cursor:pointer; }
-.vinyl { width:100%; height:100%; background:radial-gradient(circle, #333 10%, #000 100%); border-radius:50%; border:8px solid #222; box-shadow:0 0 50px rgba(0,0,0,0.9); }
-.cover { position:absolute; top:50%; left:50%; width:180px; height:180px; margin:-90px 0 0 -90px; border-radius:50%; background:url('https://img.youtube.com/vi/70WX3Zx5lDQ/hqdefault.jpg') center/cover; border:4px solid #111; z-index:2; }
-.playing { animation:rotate 15s linear infinite; }
-@keyframes rotate { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+    <meta charset="UTF-8">
+    <title>Hindenburg Lover</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; background: #000; color: #fff; overflow: hidden; }
+        .bg { 
+            position: fixed; width: 100vw; height: 100vh; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png') center/cover; 
+            filter: blur(60px); z-index: -1; transform: scale(1.2); 
+        }
+        
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        
+        /* 黑膠轉動 - 封面放大版 */
+        .vinyl-wrapper { position: relative; width: 280px; height: 280px; margin-bottom: 30px; cursor: pointer; }
+        .vinyl { width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #000 100%); border-radius: 50%; border: 8px solid #222; box-shadow: 0 0 50px rgba(0,0,0,0.9); }
+        
+        .cover { 
+            position: absolute; top: 50%; left: 50%; width: 180px; height: 180px; 
+            margin: -90px 0 0 -90px; border-radius: 50%; 
+            /* 換成 Hindenburg Lover 的封面圖 */
+            background: url('https://img.youtube.com/vi/70WX3Zx5lDQ/hqdefault.jpg') center/cover; 
+            border: 4px solid #111;
+            z-index: 2;
+        }
 
-/* 歌詞框：徹底隱藏捲軸 */
-.lyrics-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding:30px; border-radius:30px; width:85%; max-width:450px; max-height:38vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.15); scrollbar-width:none; -ms-overflow-style:none; }
-.lyrics-box::-webkit-scrollbar { display:none; }
+        .playing { animation: rotate 15s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-.lyric-text { font-size:18px; line-height:1.8; white-space:pre-line; opacity:0.95; color:#f0f0f0; }
-.back { position:fixed; top:30px; left:30px; color:#fff; text-decoration:none; padding:12px 25px; background: rgba(255,255,255,0.1); border-radius:50px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); }
-
-/* --- 修正聲音的關鍵樣式 --- */
-#player-container {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    opacity: 0.01; /* 極低透明度，看不太到但有效 */
-    pointer-events: none; /* 防止點擊到它 */
-    z-index: -10;
-}
-</style>
+        /* 磨砂玻璃框 */
+        .lyrics-box { 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            padding: 30px; border-radius: 30px; width: 85%; max-width: 450px; 
+            max-height: 38vh; overflow-y: auto; 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .lyrics-box::-webkit-scrollbar { 
+            display: none; 
+        }
+        
+        .lyric-text { font-size: 18px; line-height: 1.8; white-space: pre-line; opacity: 0.95; color: #f0f0f0; }
+        
+        .back { 
+            position: fixed; top: 30px; left: 30px; color: #fff; text-decoration: none; 
+            padding: 12px 25px; background: rgba(255,255,255,0.1); 
+            border-radius: 50px; backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+        }
+    </style>
 </head>
 <body>
-<div class="bg"></div>
-<a href="index.html" class="back">← BACK</a>
-<div class="container">
-    <div class="vinyl-wrapper" onclick="playMusic()">
-        <div id="v" class="vinyl"></div>
-        <div id="c" class="cover"></div>
-    </div>
-    <div class="lyrics-box">
-        <h2 style="margin-top:0; font-size:24px;">Hindenburg Lover</h2>
-        <div class="lyric-text">... (此處保留你的完整歌詞) ...</div>
-    </div>
-    <div id="player-container"></div>
-</div>
-
-<script>
-    function playMusic() {
-        // 1. 啟動轉動動畫
-        document.getElementById('v').classList.add('playing');
-        document.getElementById('c').classList.add('playing');
+    <div class="bg"></div>
+    <a href="index.html" class="back">← BACK</a>
+    
+    <div class="container">
+        <div class="vinyl-wrapper" onclick="playMusic()">
+            <div id="v" class="vinyl"></div>
+            <div id="c" class="cover"></div>
+        </div>
         
-        // 2. 注入播放器：使用標準 YouTube 連結，寬高足夠讓它被視為有效
-        document.getElementById('player-container').innerHTML = `
-            <iframe 
-                width="200" height="200"
-                src="https://www.youtube.com/embed/70WX3Zx5lDQ?autoplay=1&mute=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media">
-            </iframe>`;
-    }
-</script>
+        <div class="lyrics-box">
+            <h2 style="margin-top:0; font-size: 24px;">Hindenburg Lover</h2>
+            <div class="lyric-text">We were floating for days
+We were flying the way
+That doves do
+And I loved you
+We were sailing the sky
+Watching the clouds passing by
+Like a dreamland, where should we land?
+Yeah, we were invincible
+That's what they said
+So indivisible
+Wherever we went
+Higher and higher, yeah
+I guess that we had it all
+Light up the sky and then
+We thought that we'd never fall
+You were my Hindenburg lover, we were flying away
+Then we took a wrong turn and it was all up in flames
+And now I'm staring at the wreckage tryin' to make it okay
+Oh, yeah
+And I guess I got burned from the scars on my heart
+And I'd be lyin' if I said I didn't know from the start
+That there was something in between us that would tear us apart
+Oh, yeah
+I can still see your face
+Looking back through the flames
+And I search it
+Was it worth it?
+No I don't mind the smoke
+But your tears make me choke
+Are you okay? Should I go away?
+Yeah, we were invincible
+That's what they said
+So indivisible
+Wherever we went
+Higher and higher, yeah
+We thought that we'd never fall
+Light up the sky and then
+I guess that we had it all
+You were my Hindenburg lover we were flying away
+But then we took a wrong turn and it was all up in flames
+And now I'm staring at the wreckage tryin' make it okay
+Oh, yeah
+And I guess I got burned from the scars on my heart
+And I'd be lying if I said I didn't know from the start
+That there was something in between us that would keep us apart
+Oh, yeah
+You were my Hindenburg lover we were flying away
+But then we took a wrong turn and it was all up in flames
+And now I'm staring at the wreckage tryin' make it okay
+Oh, yeah
+And I guess I got burned from the scars on my heart
+And I'd be lying if I said I didn't know from the start
+That there was something in between us that would keep us apart
+Oh, yeah</div>
+        </div>
+        
+        <div id="player"></div>
+    </div>
+
+    <script>
+        function playMusic() {
+            document.getElementById('v').classList.add('playing');
+            document.getElementById('c').classList.add('playing');
+            /* 完全使用你成功的播放邏輯，只換了 ID: 70WX3Zx5lDQ */
+            document.getElementById('player').innerHTML = `
+                <iframe 
+                    width="0" height="0" 
+                    src="https://www.youtube-nocookie.com/embed/70WX3Zx5lDQ?autoplay=1&start=0&controls=0&modestbranding=1&rel=0" 
+                    frameborder="0" allow="autoplay" 
+                    style="position:absolute; visibility:hidden;">
+                </iframe>`;
+        }
+    </script>
 </body>
 </html>
