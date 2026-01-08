@@ -9,11 +9,17 @@ body { margin:0; font-family:sans-serif; background:#000; color:#fff; overflow:h
 .container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; }
 .vinyl-wrapper { position:relative; width:280px; height:280px; margin-bottom:30px; cursor:pointer; }
 .vinyl { width:100%; height:100%; background:radial-gradient(circle, #333 10%, #000 100%); border-radius:50%; border:8px solid #222; box-shadow:0 0 50px rgba(0,0,0,0.9); }
-.cover { position:absolute; top:50%; left:50%; width:180px; height:180px; margin:-90px 0 0 -90px; border-radius:50%; background:url('https://i.ytimg.com/vi/70WX3Zx5lDQ/hqdefault.jpg') center/cover; border:4px solid #111; z-index:2; }
+
+/* 黑膠封面圖 - 修正為專輯封面 */
+.cover { position:absolute; top:50%; left:50%; width:180px; height:180px; margin:-90px 0 0 -90px; border-radius:50%; background:url('https://img.youtube.com/vi/70WX3Zx5lDQ/hqdefault.jpg') center/cover; border:4px solid #111; z-index:2; }
+
 .playing { animation:rotate 15s linear infinite; }
 @keyframes rotate { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+/* 歌詞框 - 徹底隱藏捲軸 */
 .lyrics-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding:30px; border-radius:30px; width:85%; max-width:450px; max-height:38vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.15); scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch; }
 .lyrics-box::-webkit-scrollbar { display:none; }
+
 .lyric-text { font-size:18px; line-height:1.8; white-space:pre-line; opacity:0.95; color:#f0f0f0; }
 .back { position:fixed; top:30px; left:30px; color:#fff; text-decoration:none; padding:12px 25px; background: rgba(255,255,255,0.1); border-radius:50px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); }
 </style>
@@ -28,8 +34,7 @@ body { margin:0; font-family:sans-serif; background:#000; color:#fff; overflow:h
     </div>
     <div class="lyrics-box">
         <h2 style="margin-top:0; font-size:24px;">Hindenburg Lover</h2>
-        <div class="lyric-text">
-We were floating for days
+        <div class="lyric-text">We were floating for days
 We were flying the way
 That doves do
 And I loved you
@@ -82,4 +87,20 @@ Oh, yeah
 And I guess I got burned from the scars on my heart
 And I'd be lying if I said I didn't know from the start
 That there was something in between us that would keep us apart
-Oh, yeah
+Oh, yeah</div>
+    </div>
+    <div id="player" style="position: absolute; left: -9999px;"></div>
+</div>
+
+<script>
+    function playMusic() {
+        document.getElementById('v').classList.add('playing');
+        document.getElementById('c').classList.add('playing');
+        document.getElementById('player').innerHTML = `
+            <iframe width="1" height="1" 
+            src="https://www.youtube-nocookie.com/embed/70WX3Zx5lDQ?autoplay=1&rel=0" 
+            frameborder="0" allow="autoplay; encrypted-media"></iframe>`;
+    }
+</script>
+</body>
+</html>
