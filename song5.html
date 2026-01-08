@@ -2,108 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hindenburg Lover</title>
+<title>Welcome to Wonderland</title>
 <style>
 body { margin:0; font-family:sans-serif; background:#000; color:#fff; overflow:hidden; }
 .bg { position:fixed; width:100vw; height:100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('room.png') center/cover; filter: blur(60px); transform: scale(1.2); z-index:-1; }
 .container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; }
 .vinyl-wrapper { position:relative; width:280px; height:280px; margin-bottom:30px; cursor:pointer; }
 .vinyl { width:100%; height:100%; background:radial-gradient(circle, #333 10%, #000 100%); border-radius:50%; border:8px solid #222; box-shadow:0 0 50px rgba(0,0,0,0.9); }
-.cover { position:absolute; top:50%; left:50%; width:180px; height:180px; margin:-90px 0 0 -90px; border-radius:50%; background:url('https://i.ytimg.com/vi/70WX3Zx5lDQ/hqdefault.jpg') center/cover; border:4px solid #111; z-index:2; }
+.cover { position:absolute; top:50%; left:50%; width:180px; height:180px; margin:-90px 0 0 -90px; border-radius:50%; background:url('https://i.ytimg.com/vi/yjBbOn-g5bw/hqdefault.jpg') center/cover; border:4px solid #111; z-index:2; }
 .playing { animation:rotate 15s linear infinite; }
 @keyframes rotate { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
-.lyrics-box { 
-    background: rgba(255,255,255,0.1); 
-    backdrop-filter: blur(25px); 
-    -webkit-backdrop-filter: blur(25px); 
-    padding:30px; 
-    border-radius:30px; 
-    width:85%; 
-    max-width:450px; 
-    max-height:38vh; 
-    overflow-y:auto; 
-    border:1px solid rgba(255,255,255,0.15); 
-    scrollbar-width:none; 
-    -ms-overflow-style:none; 
-    -webkit-overflow-scrolling:touch;
-}
+.lyrics-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding:30px; border-radius:30px; width:85%; max-width:450px; max-height:38vh; overflow-y:auto; border:1px solid rgba(255,255,255,0.15); scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch; }
 .lyrics-box::-webkit-scrollbar { display:none; }
-.lyric-text { 
-    font-size:18px; 
-    line-height:1.8; 
-    white-space:pre-line; 
-    opacity:0.95; 
-    color:#f0f0f0; 
-    margin-top:0; 
-    padding-top:0; 
-}
+.lyric-text { font-size:18px; line-height:1.8; white-space:pre-line; opacity:0.95; color:#f0f0f0; }
 .back { position:fixed; top:30px; left:30px; color:#fff; text-decoration:none; padding:12px 25px; background: rgba(255,255,255,0.1); border-radius:50px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); }
 </style>
 </head>
 <body>
-
 <div class="bg"></div>
 <a href="index.html" class="back">← BACK</a>
-
 <div class="container">
     <div class="vinyl-wrapper" onclick="playMusic()">
         <div id="v" class="vinyl"></div>
         <div id="c" class="cover"></div>
     </div>
-
     <div class="lyrics-box">
-        <h2 style="margin-top:0; font-size:24px;">Hindenburg Lover</h2>
-        <div class="lyric-text">We were floating for days
-We were flying the way
-That doves do
-And I loved you
-We were sailing the sky
-Watching the clouds passing by
-Like a dreamland, where should we land?
-Yeah, we were invincible
-That's what they said
-So indivisible
-Wherever we went
-Higher and higher, yeah
-I guess that we had it all
-Light up the sky and then
-We thought that we'd never fall
-You were my Hindenburg lover, we were flying away
-Then we took a wrong turn and it was all up in flames
-And now I'm staring at the wreckage tryin' to make it okay
-Oh, yeah
-And I guess I got burned from the scars on my heart
-And I'd be lyin' if I said I didn't know from the start
-That there was something in between us that would tear us apart
-Oh, yeah
-I can still see your face
-Looking back through the flames
-And I search it
-Was it worth it?
-No I don't mind the smoke
-But your tears make me choke
-Are you okay? Should I go away?
-Yeah, we were invincible
-That's what they said
-So indivisible
-Wherever we went
-Higher and higher, yeah
-We thought that we'd never fall
-Light up the sky and then
-I guess that we had it all
-You were my Hindenburg lover we were flying away
-But then we took a wrong turn and it was all up in flames
-And now I'm staring at the wreckage tryin' make it okay
-Oh, yeah
-And I guess I got burned from the scars on my heart
-And I'd be lying if I said I didn't know from the start
-That there was something in between us that would keep us apart
-Oh, yeah
-You were my Hindenburg lover we were flying away
-But then we took a wrong turn and it was all up in flames
-And now I'm staring at the wreckage tryin' make it okay
-Oh, yeah
-And I guess I got burned from the scars on my heart
-And I'd be lying if I said I didn't know from the start
-That there was something in between us that would keep us apart
-Oh, yeah
+        <h2 style="margin-top:0; font-size:24px;">Welcome to Wonderland</h2>
+        <div class="lyric-text">
+Welcome to Wonderland, we've got it all
+Potions and pastries that make you grow tall
+Forests and cottages, castles and cards that can talk
+Welcome to Wonderland, look where you're at
+Maddest of hatters, the Cheshire Cat
+Magical cabins and lovely white rabbits with clocks
+Dancing through a dream underneath the stars
+Laughing 'til the morning comes
+Everyone that leaves has a heavy heart
+Oh, Wonderland I love
+Welcome to Wonderland, I'll be your guide
+Holding your hand under sapphire skies
+Let's go exploring or we could just go for a walk
+Welcome to Wonderland, where should we go
+There's a tea party along down the road
+Make an appearance and maybe they'll sing us a song
+Dancing through a dream underneath the stars
+Laughing 'til the morning comes
+Everyone that leaves has a heavy heart
+Oh, Wonderland I love
+Nothing around here is quite as it seems
+Not sure if anything's real or a dream
+And the only thing sure from the start
+Is the song that's inside of your heart
+Don't let it leave
+If this was a dream, then at least I've got
+Memories for when morning comes
+Now that I must leave with a heavy heart
+Oh, Wonderland I love
